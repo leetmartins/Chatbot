@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    //Caso o usuário digite HI ou HELLO usei a tag radomm para responder de 5 maneiras diferentes
+    <category>
+        <pattern> HI </pattern>
+        <pattern> HELLO </pattern>
+        <template>
+            <random>
+                <li> Hi! I'm Green Robot :) What's your name? </li>
+                <li> Hello, How are you? </li>
+                <li> Hi! Welcome here! </li>
+                <li> Hello! </li>
+                <li> Hi! </li>
+            </random>
+        </template>
+    </category>
+    
+    //Se alguma entrada for diferente do esperado o bot vai responder dessa forma
+    <category>
+        <pattern>*</pattern>
+        <template> Sorry, I didn't understand, can you repeat, please? </template> 
+    </category>
+    
+    //O nome foi armazenado dentro da variavel nome utilizando a tag set e star(identifica o nome por *)
+    <category>
+        <pattern> My name is *</pattern>
+            <template>
+                <think> <set name="name"><star/> </set></think>
+            </template> 
+    </category>
+    
+    //A tag srai foi usada para identificar diversas formas de entrada do nome e a tag star para identificar o nome
+    <category>
+        <pattern> YOU CAN CALL ME * </pattern>
+        <template>
+        	<srai> My name is <star/></srai>
+        </template>
+     </category>
+    
+    <category>
+        <pattern> I AM CALLED * </pattern>
+        <template>
+        	<srai> My name is <star/></srai>
+        </template>
+     </category>
+    
+    <category>
+        <pattern> MY MON CALLS ME * </pattern>
+        <template>
+        	<srai> My name is <star/></srai>
+        </template>
+     </category>
+    
+    <category>
+        <pattern> I'M KNOWN AS * </pattern>
+        <template>
+        	<srai> My name is <star/></srai>
+        </template>
+     </category>
+    
+    //A tag that foi utilizada para identificar dois tipos de respostas para a pergunta How are you, e o bot responde de acordo com essa identificação 
+    <category>
+        <pattern> FINE </pattern>
+        <that> Hello, How are you? </that>
+        <template> Cool, i'm happy that you are fine :) </template>
+    </category>
+
+    <category>
+        <pattern> BAD </pattern>
+        <that> Hello, How are you? </that>
+        <template> Oh really? Do you want to talk about that? </template>
+    </category>
+    
+    //Entrada para o tópico sobre bolos
+    <category>
+        <pattern> LET'S TALK ABOUT CAKE </pattern>
+        <template> Yes <set name="topic">cake</set> </template>
+    </category>
+    //Dentro do tópico se a entrada for desconhecida a resposta padrão será: I never had a bad cake.
+    <topic name="cake">
+        <category>
+            <pattern> * </pattern>
+            <template> I never had a bad cake. </template>
+        </category>
+
+        <category>
+            <pattern >WHAT'S YOUR FAVORITE CAKE? </pattern>
+            <template> My favorite cake is chocolate cake. </template>
+        </category>
+    </topic>
+
+    //A tag get recupera o nome definido pela tag set anteriormente e o bot se despede do usuário
+    <category>
+         <pattern> BYE </pattern>
+         <template> Bye <get name="name"/>, thanks for the talk. </template>
+    </category>
+</aiml>
